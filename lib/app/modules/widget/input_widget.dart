@@ -24,12 +24,13 @@ class InputForm extends StatelessWidget {
         decoration: InputDecoration(
           labelText: labelParam,
           hintText: 'Masukan $labelParam disini',
-          hintStyle: GoogleFonts.poppins(),
+          hintStyle: GoogleFonts.poppins(fontSize: 12),
           contentPadding: const EdgeInsets.symmetric(horizontal: 20),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
         ),
+        obscureText: obsecureParam,
       ),
     );
   }
