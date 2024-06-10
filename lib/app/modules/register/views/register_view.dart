@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:royal_canary_farm_app/app/modules/login/views/login_view.dart';
 import 'package:royal_canary_farm_app/app/modules/widget/input_widget.dart';
 import '../controllers/register_controller.dart';
 
@@ -167,6 +168,25 @@ class RegisterView extends GetView<RegisterController> {
                           ),
                   );
                 }),
+                const SizedBox(
+                  height: 15,
+                ),
+                Row(mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                  Text(
+                    "Sudah memiliki akun?",
+                    style: GoogleFonts.poppins(fontSize: size * 0.035),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Get.to(() => LoginView());
+                    },
+                    child: Text(
+                      "Masuk disini!",
+                      style: GoogleFonts.poppins(fontSize: size * 0.035),
+                    ),
+                  ),
+                ],)
               ],
             ),
           ),
