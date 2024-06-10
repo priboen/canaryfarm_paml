@@ -21,6 +21,7 @@ class InputForm extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextFormField(
+        controller: controllerParam,
         decoration: InputDecoration(
           labelText: labelParam,
           hintText: 'Masukan $labelParam disini',
