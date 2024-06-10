@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:royal_canary_farm_app/app/modules/register/views/register_view.dart';
 import 'package:royal_canary_farm_app/app/modules/widget/input_widget.dart';
 
 import '../controllers/login_controller.dart';
@@ -79,6 +80,31 @@ class LoginView extends GetView<LoginController> {
                 },
               ),
             ),
+            const SizedBox(
+              height: 25,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Belum memiliki akun?",
+                  style: GoogleFonts.poppins(
+                    fontSize: size * 0.035,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Get.to(() => RegisterView());
+                  },
+                  child: Text(
+                    "Daftar disini!",
+                    style: GoogleFonts.poppins(
+                      fontSize: size * 0.035,
+                    ),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
