@@ -8,6 +8,14 @@ import '../controllers/register_controller.dart';
 class RegisterView extends GetView<RegisterController> {
   RegisterView({super.key});
 
+  final nameController = TextEditingController();
+  final addressController = TextEditingController();
+  final phoneController = TextEditingController();
+  final emailController = TextEditingController();
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size.width;
@@ -19,8 +27,10 @@ class RegisterView extends GetView<RegisterController> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Register Page',
-                    style: GoogleFonts.poppins(fontSize: size * 0.040)),
+                Text(
+                  'Register Page',
+                  style: GoogleFonts.poppins(fontSize: size * 0.040),
+                ),
                 const SizedBox(height: 30),
                 GetBuilder<RegisterController>(
                   builder: (controller) {
@@ -77,39 +87,46 @@ class RegisterView extends GetView<RegisterController> {
                 ),
                 const SizedBox(height: 15),
                 InputForm(
-                    labelParam: 'Nama Lengkap',
-                    controllerParam: controller.nameController,
-                    obsecureParam: false),
+                  labelParam: 'Nama Lengkap',
+                  controllerParam: controller.nameController,
+                  obsecureParam: false,
+                ),
                 const SizedBox(height: 15),
                 InputForm(
-                    labelParam: 'Alamat',
-                    controllerParam: controller.addressController,
-                    obsecureParam: false),
+                  labelParam: 'Alamat',
+                  controllerParam: controller.addressController,
+                  obsecureParam: false,
+                ),
                 const SizedBox(height: 15),
                 InputForm(
-                    labelParam: 'No. Telepon',
-                    controllerParam: controller.phoneController,
-                    obsecureParam: false),
+                  labelParam: 'No. Telepon',
+                  controllerParam: controller.phoneController,
+                  obsecureParam: false,
+                ),
                 const SizedBox(height: 15),
                 InputForm(
-                    labelParam: 'Email',
-                    controllerParam: controller.emailController,
-                    obsecureParam: false),
+                  labelParam: 'Email',
+                  controllerParam: controller.emailController,
+                  obsecureParam: false,
+                ),
                 const SizedBox(height: 15),
                 InputForm(
-                    labelParam: 'Username',
-                    controllerParam: controller.usernameController,
-                    obsecureParam: false),
+                  labelParam: 'Username',
+                  controllerParam: controller.usernameController,
+                  obsecureParam: false,
+                ),
                 const SizedBox(height: 15),
                 InputForm(
-                    labelParam: 'Password',
-                    controllerParam: controller.passwordController,
-                    obsecureParam: true),
+                  labelParam: 'Password',
+                  controllerParam: controller.passwordController,
+                  obsecureParam: true,
+                ),
                 const SizedBox(height: 15),
                 InputForm(
-                    labelParam: 'Konfirmasi Password',
-                    controllerParam: controller.confirmPasswordController,
-                    obsecureParam: true),
+                  labelParam: 'Konfirmasi Password',
+                  controllerParam: controller.confirmPasswordController,
+                  obsecureParam: true,
+                ),
                 const SizedBox(height: 15),
                 Obx(() {
                   return ElevatedButton(
@@ -117,19 +134,37 @@ class RegisterView extends GetView<RegisterController> {
                       backgroundColor: Colors.black,
                       elevation: 0,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 50, vertical: 15),
+                        horizontal: 50,
+                        vertical: 15,
+                      ),
                     ),
                     onPressed: controller.isLoading.value
                         ? null
                         : () {
+                            // Log the current data
+                            print('Name: ${controller.nameController.text}');
+                            print(
+                                'Username: ${controller.usernameController.text}');
+                            print('Email: ${controller.emailController.text}');
+                            print(
+                                'Password: ${controller.passwordController.text}');
+                            print(
+                                'Confirm Password: ${controller.confirmPasswordController.text}');
+                            print(
+                                'Address: ${controller.addressController.text}');
+                            print('Phone: ${phoneController.text}');
+                            print(
+                                'Selected Image: ${controller.selectedImage}');
+
                             controller.register();
-                            print(controller.nameController.text);
                           },
                     child: controller.isLoading.value
                         ? CircularProgressIndicator(color: Colors.white)
-                        : Text('Daftar',
+                        : Text(
+                            'Daftar',
                             style: GoogleFonts.poppins(
-                                fontSize: size * 0.030, color: Colors.white)),
+                                fontSize: size * 0.030, color: Colors.white),
+                          ),
                   );
                 }),
               ],
