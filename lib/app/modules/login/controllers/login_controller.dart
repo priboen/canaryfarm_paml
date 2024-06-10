@@ -24,7 +24,7 @@ class LoginController extends GetxController {
       };
 
       var response = await http.post(
-        Uri.parse('${url}login'),
+        Uri.parse('$url/login'),
         headers: {
           'Accept': 'application/json',
         },

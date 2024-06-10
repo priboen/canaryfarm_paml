@@ -72,7 +72,8 @@ class LoginView extends GetView<LoginController> {
                       : Text(
                           "Login",
                           style: GoogleFonts.poppins(
-                            fontSize: size * 0.080,
+                            fontSize: size * 0.040,
+                            color: Colors.white,
                           ),
                         );
                 },
