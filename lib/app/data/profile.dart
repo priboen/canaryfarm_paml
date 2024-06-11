@@ -1,13 +1,14 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class Profie {
-  int? id;
+  final String username;
   final String name;
   final String address;
   final String phone;
   final String photo;
   Profie({
-    this.id,
+    required this.username,
     required this.name,
     required this.address,
     required this.phone,
@@ -15,14 +16,14 @@ class Profie {
   });
 
   Profie copyWith({
-    int? id,
+    String? username,
     String? name,
     String? address,
     String? phone,
     String? photo,
   }) {
     return Profie(
-      id: id ?? this.id,
+      username: username ?? this.username,
       name: name ?? this.name,
       address: address ?? this.address,
       phone: phone ?? this.phone,
@@ -32,7 +33,7 @@ class Profie {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
+      'username': username,
       'name': name,
       'address': address,
       'phone': phone,
@@ -42,7 +43,7 @@ class Profie {
 
   factory Profie.fromMap(Map<String, dynamic> map) {
     return Profie(
-      id: map['id'] != null ? map['id'] as int : null,
+      username: map['username'] as String,
       name: map['name'] as String,
       address: map['address'] as String,
       phone: map['phone'] as String,
@@ -57,7 +58,7 @@ class Profie {
 
   @override
   String toString() {
-    return 'Profie(id: $id, name: $name, address: $address, phone: $phone, photo: $photo)';
+    return 'Profie(username: $username, name: $name, address: $address, phone: $phone, photo: $photo)';
   }
 
   @override
@@ -65,7 +66,7 @@ class Profie {
     if (identical(this, other)) return true;
   
     return 
-      other.id == id &&
+      other.username == username &&
       other.name == name &&
       other.address == address &&
       other.phone == phone &&
@@ -74,7 +75,7 @@ class Profie {
 
   @override
   int get hashCode {
-    return id.hashCode ^
+    return username.hashCode ^
       name.hashCode ^
       address.hashCode ^
       phone.hashCode ^
