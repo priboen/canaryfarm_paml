@@ -9,7 +9,7 @@ import 'package:royal_canary_farm_app/app/routes/app_pages.dart';
 class ProfileController extends GetxController {
   var isLoading = false.obs;
   var profile = Profie(
-    id: null,
+    username: '',
     name: '',
     address: '',
     phone: '',
@@ -28,7 +28,7 @@ class ProfileController extends GetxController {
     try {
       isLoading(true);
       final token = await storage.read(key: 'token');
-      print('Token retrieved: $token'); // Log untuk debugging
+      print('Token retrieved: $token'); // Log for debugging
       if (token == null) {
         Get.snackbar('Error', 'Token not found');
         isLoading(false); // Set isLoading to false when there's an error
@@ -43,9 +43,9 @@ class ProfileController extends GetxController {
 
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
-        print('Response data: $responseData'); // Log untuk debugging
+        print('Response data: $responseData'); // Log for debugging
 
-        profile.value = Profie.fromMap(responseData); // pastikan sesuai dengan data yang diterima
+        profile.value = Profie.fromMap(responseData); // Ensure it matches the data received
       } else {
         Get.snackbar('Error', 'Failed to load profile: ${response.body}');
       }

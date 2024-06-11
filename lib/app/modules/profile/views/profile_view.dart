@@ -16,6 +16,8 @@ class ProfileView extends GetView<ProfileController> {
           if (controller.isLoading.value) {
             return const Center(child: CircularProgressIndicator());
           } else {
+            final photoUrl = controller.profile.value.photo; // Now uses full URL from API
+
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -26,8 +28,7 @@ class ProfileView extends GetView<ProfileController> {
                         children: [
                           CircleAvatar(
                             radius: 80,
-                            backgroundImage:
-                                NetworkImage(controller.profile.value.photo),
+                            backgroundImage: NetworkImage(photoUrl),
                           ),
                           Positioned(
                             bottom: -10,
@@ -54,8 +55,7 @@ class ProfileView extends GetView<ProfileController> {
                                             },
                                           ),
                                           ListTile(
-                                            leading:
-                                                const Icon(Icons.photo_album),
+                                            leading: const Icon(Icons.photo_album),
                                             title: const Text('Gallery'),
                                             onTap: () {
                                               // Implementasi pengambilan gambar dari galeri
@@ -87,7 +87,7 @@ class ProfileView extends GetView<ProfileController> {
                         height: 5,
                       ),
                       Text(
-                        controller.profile.value.id.toString(),
+                        controller.profile.value.username,
                         style: GoogleFonts.roboto(
                           fontSize: size * 0.030,
                           fontWeight: FontWeight.w400,
