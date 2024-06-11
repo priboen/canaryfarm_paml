@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:royal_canary_farm_app/app/modules/register/views/register_view.dart';
 import 'package:royal_canary_farm_app/app/modules/widget/input_widget.dart';
+import 'package:royal_canary_farm_app/app/routes/app_pages.dart';
 
 import '../controllers/login_controller.dart';
 
@@ -94,7 +94,7 @@ class LoginView extends GetView<LoginController> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Get.to(() => RegisterView());
+                    Get.toNamed(Routes.REGISTER);
                   },
                   child: Text(
                     "Daftar disini!",
