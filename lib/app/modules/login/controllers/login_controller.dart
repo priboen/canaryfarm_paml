@@ -5,7 +5,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:royal_canary_farm_app/api/service/constant.dart';
-import 'package:royal_canary_farm_app/app/modules/home/views/home_view.dart';
+import 'package:royal_canary_farm_app/app/modules/widget/navigation_menu.dart';
 
 class LoginController extends GetxController {
   final isLoading = false.obs;
@@ -34,8 +34,15 @@ class LoginController extends GetxController {
       if (response.statusCode == 200) {
         isLoading.value = false;
         token.value = json.decode(response.body)['token'];
-        await storage.write(key: 'token', value: token.value); // Simpan token ke FlutterSecureStorage
-        Get.offAll(() => const HomeView());
+        await storage.write(
+            key: 'token',
+            value: token.value); // Simpan token ke FlutterSecureStorage
+        // Get.offAll(
+        //   () => const HomeView(),
+        // );
+        Get.offAll(
+          () => const NavigationMenu(),
+        );
       } else {
         isLoading.value = false;
         Get.snackbar(
