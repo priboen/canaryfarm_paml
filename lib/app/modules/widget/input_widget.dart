@@ -17,7 +17,6 @@ class InputForm extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.grey[200],
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextFormField(
@@ -25,7 +24,7 @@ class InputForm extends StatelessWidget {
         decoration: InputDecoration(
           labelText: labelParam,
           hintText: 'Masukan $labelParam disini',
-          hintStyle: GoogleFonts.poppins(fontSize: 12),
+          hintStyle: GoogleFonts.roboto(fontSize: 12),
           contentPadding: const EdgeInsets.symmetric(horizontal: 20),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
