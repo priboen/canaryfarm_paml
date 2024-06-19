@@ -8,7 +8,7 @@ import 'package:royal_canary_farm_app/app/routes/app_pages.dart';
 
 class ProfileController extends GetxController {
   var isLoading = false.obs;
-  var profile = Profie(
+  var profile = Profile(
     username: '',
     name: '',
     address: '',
@@ -45,7 +45,7 @@ class ProfileController extends GetxController {
         final responseData = jsonDecode(response.body);
         print('Response data: $responseData'); // Log for debugging
 
-        profile.value = Profie.fromMap(responseData); // Ensure it matches the data received
+        profile.value = Profile.fromMap(responseData); // Ensure it matches the data received
       } else {
         Get.snackbar('Error', 'Failed to load profile: ${response.body}');
       }

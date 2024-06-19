@@ -1,13 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-class Profie {
+class Profile {
+  int? id;
   final String username;
   final String name;
   final String address;
   final String phone;
   final String photo;
-  Profie({
+  Profile({
+    this.id,
     required this.username,
     required this.name,
     required this.address,
@@ -15,14 +17,16 @@ class Profie {
     required this.photo,
   });
 
-  Profie copyWith({
+  Profile copyWith({
+    int? id,
     String? username,
     String? name,
     String? address,
     String? phone,
     String? photo,
   }) {
-    return Profie(
+    return Profile(
+      id: id ?? this.id,
       username: username ?? this.username,
       name: name ?? this.name,
       address: address ?? this.address,
@@ -33,6 +37,7 @@ class Profie {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'id': id,
       'username': username,
       'name': name,
       'address': address,
@@ -41,8 +46,9 @@ class Profie {
     };
   }
 
-  factory Profie.fromMap(Map<String, dynamic> map) {
-    return Profie(
+  factory Profile.fromMap(Map<String, dynamic> map) {
+    return Profile(
+      id: map['id'] != null ? map['id'] as int : null,
       username: map['username'] as String,
       name: map['name'] as String,
       address: map['address'] as String,
@@ -53,32 +59,33 @@ class Profie {
 
   String toJson() => json.encode(toMap());
 
-  factory Profie.fromJson(String source) =>
-      Profie.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Profile.fromJson(String source) =>
+      Profile.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'Profie(username: $username, name: $name, address: $address, phone: $phone, photo: $photo)';
+    return 'Profile(id: $id, username: $username, name: $name, address: $address, phone: $phone, photo: $photo)';
   }
 
   @override
-  bool operator ==(covariant Profie other) {
+  bool operator ==(covariant Profile other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.username == username &&
-      other.name == name &&
-      other.address == address &&
-      other.phone == phone &&
-      other.photo == photo;
+
+    return other.id == id &&
+        other.username == username &&
+        other.name == name &&
+        other.address == address &&
+        other.phone == phone &&
+        other.photo == photo;
   }
 
   @override
   int get hashCode {
-    return username.hashCode ^
-      name.hashCode ^
-      address.hashCode ^
-      phone.hashCode ^
-      photo.hashCode;
+    return id.hashCode ^
+        username.hashCode ^
+        name.hashCode ^
+        address.hashCode ^
+        phone.hashCode ^
+        photo.hashCode;
   }
 }
