@@ -27,9 +27,9 @@ class LoginView extends GetView<LoginController> {
           children: [
             const LoginHeader(),
             Text("Login Page",
-                style: GoogleFonts.poppins(fontSize: size * 0.080)),
+                style: GoogleFonts.roboto(fontSize: size * 0.080)),
             Text("Royal Canary Bird Farm",
-                style: GoogleFonts.poppins(fontSize: size * 0.040)),
+                style: GoogleFonts.roboto(fontSize: size * 0.040)),
             const SizedBox(
               height: 15,
             ),
@@ -72,7 +72,7 @@ class LoginView extends GetView<LoginController> {
                         )
                       : Text(
                           "Login",
-                          style: GoogleFonts.poppins(
+                          style: GoogleFonts.roboto(
                             fontSize: size * 0.040,
                             color: Colors.white,
                           ),
@@ -88,7 +88,7 @@ class LoginView extends GetView<LoginController> {
               children: [
                 Text(
                   "Belum memiliki akun?",
-                  style: GoogleFonts.poppins(
+                  style: GoogleFonts.roboto(
                     fontSize: size * 0.035,
                   ),
                 ),
@@ -98,7 +98,7 @@ class LoginView extends GetView<LoginController> {
                   },
                   child: Text(
                     "Daftar disini!",
-                    style: GoogleFonts.poppins(
+                    style: GoogleFonts.roboto(
                       fontSize: size * 0.035,
                     ),
                   ),
