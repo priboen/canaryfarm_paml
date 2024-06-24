@@ -17,6 +17,9 @@ class CanaryView extends GetView<CanaryController> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Tambah Burung'),
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20),
         child: Form(
@@ -98,12 +101,6 @@ class CanaryView extends GetView<CanaryController> {
               CanaryTypeDropdown(
                 items: CanaryType.canaryItems,
                 hint: 'Pilih Jenis Kenari',
-                validator: (value) {
-                  if (value == null) {
-                    return 'Please select a canary type.';
-                  }
-                  return null;
-                },
                 onChanged: (value) {
                   controller.selectedCanaryType.value = value.toString();
                 },
@@ -119,7 +116,7 @@ class CanaryView extends GetView<CanaryController> {
                 label: 'Tanggal Lahir',
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Silahkan pilih tanggal!';
+                    return 'Silakan pilih tanggal!';
                   }
                   return null;
                 },
@@ -172,14 +169,21 @@ class CanaryView extends GetView<CanaryController> {
                   ),
                   onPressed: () {
                     controller.saveBird();
-                    print(context);
                   },
-                  child: Text(
-                    'Simpan',
-                    style: GoogleFonts.roboto(
-                      fontSize: size * 0.040,
-                      color: Colors.white,
-                    ),
+                  child: Obx(
+                    () {
+                      return controller.isLoading.value
+                          ? const CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : Text(
+                              "Simpan",
+                              style: GoogleFonts.roboto(
+                                fontSize: size * 0.040,
+                                color: Colors.white,
+                              ),
+                            );
+                    },
                   ),
                 ),
               ),
