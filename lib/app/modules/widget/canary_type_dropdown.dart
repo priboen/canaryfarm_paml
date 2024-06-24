@@ -9,7 +9,6 @@ class CanaryTypeDropdown extends StatelessWidget {
   final String? hint;
   final Function(String?)? onChanged;
   final Function(String?)? onSaved;
-  final String? Function(String?)? validator;
 
   const CanaryTypeDropdown({
     super.key,
@@ -17,7 +16,6 @@ class CanaryTypeDropdown extends StatelessWidget {
     this.hint,
     this.onChanged,
     this.onSaved,
-    this.validator,
   });
 
   @override
@@ -47,7 +45,6 @@ class CanaryTypeDropdown extends StatelessWidget {
             ),
           )
           .toList(),
-      validator: validator,
       onChanged: onChanged,
       onSaved: onSaved,
       buttonStyleData: const ButtonStyleData(
