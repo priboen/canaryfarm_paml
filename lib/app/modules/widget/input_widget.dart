@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class InputForm extends StatelessWidget {
-  const InputForm(
-      {super.key,
-      required this.labelParam,
-      required this.controllerParam,
-      required this.obsecureParam});
+  const InputForm({
+    super.key,
+    required this.labelParam,
+    required this.controllerParam,
+    required this.obsecureParam,
+  });
 
   final String labelParam;
   final TextEditingController controllerParam;
