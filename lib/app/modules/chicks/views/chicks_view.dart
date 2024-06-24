@@ -89,7 +89,8 @@ class ChicksView extends GetView<ChicksController> {
                                           },
                                         );
                                       },
-                                      icon: const Icon(Icons.add_a_photo_rounded),
+                                      icon:
+                                          const Icon(Icons.add_a_photo_rounded),
                                     ),
                                   ),
                                 ),
@@ -117,17 +118,13 @@ class ChicksView extends GetView<ChicksController> {
                       CanaryTypeDropdown(
                         items: CanaryType.canaryItems,
                         hint: 'Pilih Jenis Kenari',
-                        validator: (value) {
-                          if (value == null) {
-                            return 'Please select a canary type.';
-                          }
-                          return null;
-                        },
                         onChanged: (value) {
-                          controller.selectedCanaryType.value = value.toString();
+                          controller.selectedCanaryType.value =
+                              value.toString();
                         },
                         onSaved: (value) {
-                          controller.selectedCanaryType.value = value.toString();
+                          controller.selectedCanaryType.value =
+                              value.toString();
                         },
                       ),
                       const SizedBox(
@@ -164,11 +161,11 @@ class ChicksView extends GetView<ChicksController> {
                             items: controller.males
                                 .map((male) => male.ringNumber)
                                 .toList(),
-                            hint: 'Pilih Ayah',
+                            hint: 'Pilih Indukan Jantan',
                             onChanged: (selectedValue) {
                               controller.selectedMale.value = controller.males
-                                  .firstWhere(
-                                      (male) => male.ringNumber == selectedValue);
+                                  .firstWhere((male) =>
+                                      male.ringNumber == selectedValue);
                             },
                           ),
                           const SizedBox(
@@ -180,8 +177,8 @@ class ChicksView extends GetView<ChicksController> {
                                 .toList(),
                             hint: 'Pilih Ibu',
                             onChanged: (selectedValue) {
-                              controller.selectedFemale.value = controller.females
-                                  .firstWhere((female) =>
+                              controller.selectedFemale.value =
+                                  controller.females.firstWhere((female) =>
                                       female.ringNumber == selectedValue);
                             },
                           ),
