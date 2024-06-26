@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:royal_canary_farm_app/api/service/constant.dart';
 import 'package:royal_canary_farm_app/app/data/gender.dart';
 import 'package:http/http.dart' as http;
+import 'package:royal_canary_farm_app/app/modules/widget/navigation_menu.dart';
 
 class CanaryController extends GetxController {
   final formKey = GlobalKey<FormState>();
@@ -37,22 +38,24 @@ class CanaryController extends GetxController {
   }
 
   void saveBird() async {
-    isLoading.value = true;
-
     if (selectedImage == null) {
-      Get.snackbar('Error', 'Please select an image',
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.red,
-          colorText: Colors.white);
+      Get.snackbar(
+        'Error',
+        'Silakan pilih gambar',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
       return;
     }
 
+    isLoading.value = true;
+
     try {
       final token = await storage.read(key: 'token');
-      print('Token retrieved: $token'); // Log for debugging
       if (token == null) {
-        Get.snackbar('Error', 'Token not found');
-        isLoading.value = false; // Set isLoading to false when there's an error
+        Get.snackbar('Error', 'Token tidak ditemukan');
+        isLoading.value = false;
         return;
       }
 
@@ -75,15 +78,16 @@ class CanaryController extends GetxController {
 
       if (response.statusCode == 200) {
         isLoading.value = false;
-        print(response.statusCode); // Log for debugging
         Get.snackbar(
           'Success',
-          'Data Induk berhasil di simpan.',
+          'Data Induk berhasil disimpan.',
           snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.green,
           colorText: Colors.white,
         );
-        resetForm();
+        Get.offAll(
+          () => const NavigationMenu(),
+        );
       } else {
         var responseData = await response.stream.bytesToString();
         var decodedData = json.decode(responseData);
@@ -91,17 +95,17 @@ class CanaryController extends GetxController {
             snackPosition: SnackPosition.TOP,
             backgroundColor: Colors.red,
             colorText: Colors.white);
-        print(decodedData);
+        isLoading.value = false;
       }
     } catch (e) {
       Get.snackbar(
         'Error',
-        'Terjadi Kesalahan: $e',
+        'Terjadi kesalahan: $e',
         snackPosition: SnackPosition.TOP,
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
-      print(e);
+      isLoading.value = false;
     }
   }
 

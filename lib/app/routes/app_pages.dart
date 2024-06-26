@@ -1,5 +1,11 @@
 import 'package:get/get.dart';
 
+import '../modules/canary/bindings/canary_binding.dart';
+import '../modules/canary/views/canary_view.dart';
+import '../modules/canarylist/bindings/canarylist_binding.dart';
+import '../modules/canarylist/views/canarylist_view.dart';
+import '../modules/chicks/bindings/chicks_binding.dart';
+import '../modules/chicks/views/chicks_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -34,8 +40,23 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFILE,
-      page: () => const ProfileView(),
+      page: () => ProfileView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.CANARY,
+      page: () => CanaryView(),
+      binding: CanaryBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHICKS,
+      page: () => const ChicksView(),
+      binding: ChicksBinding(),
+    ),
+    GetPage(
+      name: _Paths.CANARYLIST,
+      page: () => const CanarylistView(),
+      binding: CanarylistBinding(),
     ),
   ];
 }

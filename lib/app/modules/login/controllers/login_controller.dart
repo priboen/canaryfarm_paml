@@ -40,6 +40,13 @@ class LoginController extends GetxController {
         // Get.offAll(
         //   () => const HomeView(),
         // );
+        Get.snackbar(
+          'Sukses',
+          json.decode(response.body)['nama_breeder'].toString(),
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
         Get.offAll(
           () => const NavigationMenu(),
         );
