@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:royal_canary_farm_app/app/modules/login/views/login_view.dart';
 import 'package:royal_canary_farm_app/app/modules/widget/input_widget.dart';
+import 'package:royal_canary_farm_app/app/modules/widget/maps_screen.dart';
 import '../controllers/register_controller.dart';
 
 class RegisterView extends GetView<RegisterController> {
@@ -89,43 +90,47 @@ class RegisterView extends GetView<RegisterController> {
                 const SizedBox(height: 15),
                 InputForm(
                   labelParam: 'Nama Lengkap',
-                  controllerParam: controller.nameController,
+                  controllerParam: nameController,
                   obsecureParam: false,
                 ),
                 const SizedBox(height: 15),
                 InputForm(
                   labelParam: 'Alamat',
-                  controllerParam: controller.addressController,
+                  controllerParam: addressController,
                   obsecureParam: false,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Get.to(() => MapsScreen(
+                          onLocationSelected: (address) {
+                            addressController.text = address;
+                          },
+                        ));
+                  },
+                  child: Text('Pilih Alamat dari Peta'),
                 ),
                 const SizedBox(height: 15),
                 InputForm(
                   labelParam: 'No. Telepon',
-                  controllerParam: controller.phoneController,
-                  obsecureParam: false,
-                ),
-                const SizedBox(height: 15),
-                InputForm(
-                  labelParam: 'Email',
-                  controllerParam: controller.emailController,
+                  controllerParam: phoneController,
                   obsecureParam: false,
                 ),
                 const SizedBox(height: 15),
                 InputForm(
                   labelParam: 'Username',
-                  controllerParam: controller.usernameController,
+                  controllerParam: usernameController,
                   obsecureParam: false,
                 ),
                 const SizedBox(height: 15),
                 InputForm(
                   labelParam: 'Password',
-                  controllerParam: controller.passwordController,
+                  controllerParam: passwordController,
                   obsecureParam: true,
                 ),
                 const SizedBox(height: 15),
                 InputForm(
                   labelParam: 'Konfirmasi Password',
-                  controllerParam: controller.confirmPasswordController,
+                  controllerParam: confirmPasswordController,
                   obsecureParam: true,
                 ),
                 const SizedBox(height: 15),
@@ -143,16 +148,12 @@ class RegisterView extends GetView<RegisterController> {
                         ? null
                         : () {
                             // Log the current data
-                            print('Name: ${controller.nameController.text}');
+                            print('Name: ${nameController.text}');
+                            print('Username: ${usernameController.text}');
+                            print('Password: ${passwordController.text}');
                             print(
-                                'Username: ${controller.usernameController.text}');
-                            print('Email: ${controller.emailController.text}');
-                            print(
-                                'Password: ${controller.passwordController.text}');
-                            print(
-                                'Confirm Password: ${controller.confirmPasswordController.text}');
-                            print(
-                                'Address: ${controller.addressController.text}');
+                                'Confirm Password: ${confirmPasswordController.text}');
+                            print('Address: ${addressController.text}');
                             print('Phone: ${phoneController.text}');
                             print(
                                 'Selected Image: ${controller.selectedImage}');
@@ -168,25 +169,25 @@ class RegisterView extends GetView<RegisterController> {
                           ),
                   );
                 }),
-                const SizedBox(
-                  height: 15,
-                ),
-                Row(mainAxisAlignment: MainAxisAlignment.center,
+                const SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                  Text(
-                    "Sudah memiliki akun?",
-                    style: GoogleFonts.poppins(fontSize: size * 0.035),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Get.to(() => LoginView());
-                    },
-                    child: Text(
-                      "Masuk disini!",
+                    Text(
+                      "Sudah memiliki akun?",
                       style: GoogleFonts.poppins(fontSize: size * 0.035),
                     ),
-                  ),
-                ],)
+                    TextButton(
+                      onPressed: () {
+                        Get.to(() => LoginView());
+                      },
+                      child: Text(
+                        "Masuk disini!",
+                        style: GoogleFonts.poppins(fontSize: size * 0.035),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
