@@ -94,20 +94,41 @@ class RegisterView extends GetView<RegisterController> {
                   obsecureParam: false,
                 ),
                 const SizedBox(height: 15),
-                InputForm(
-                  labelParam: 'Alamat',
-                  controllerParam: addressController,
-                  obsecureParam: false,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Get.to(() => MapsScreen(
-                          onLocationSelected: (address) {
-                            addressController.text = address;
-                          },
-                        ));
-                  },
-                  child: Text('Pilih Alamat dari Peta'),
+                Row(
+                  children: [
+                    Expanded(
+                      child: InputForm(
+                        labelParam: 'Alamat',
+                        controllerParam: addressController,
+                        obsecureParam: false,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    ElevatedButton.icon(
+                        onPressed: () {
+                          Get.to(() => MapsScreen(
+                                onLocationSelected: (address) {
+                                  addressController.text = address;
+                                },
+                              ));
+                        },
+                        label: Text(
+                          'Maps',
+                          style: GoogleFonts.roboto(
+                            fontSize: size * 0.030,
+                            color: Colors.white,
+                          ),
+                        ),
+                        icon: Icon(
+                          Icons.location_pin,
+                          color: Colors.white,
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                        )),
+                  ],
                 ),
                 const SizedBox(height: 15),
                 InputForm(
