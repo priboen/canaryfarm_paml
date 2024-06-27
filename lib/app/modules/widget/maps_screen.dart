@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapsScreen extends StatefulWidget {
@@ -14,6 +15,7 @@ class MapsScreen extends StatefulWidget {
 class _MapsScreenState extends State<MapsScreen> {
   late GoogleMapController mapController;
   LatLng? lastMapPosition;
+  bool isMapCreated = false;
 
   @override
   void initState() {
@@ -22,26 +24,24 @@ class _MapsScreenState extends State<MapsScreen> {
   }
 
   Future<void> getCurrentLocation() async {
-    await Geolocator.requestPermission()
-        .then((value) {})
-        .onError((error, stackTrace) async {
-      await Geolocator.requestPermission();
-    });
-
-    var position = await Geolocator.getCurrentPosition(
+    await Geolocator.requestPermission();
+    Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
     setState(() {
       lastMapPosition = LatLng(position.latitude, position.longitude);
     });
-    mapController.animateCamera(CameraUpdate.newLatLng(lastMapPosition!));
+    if (isMapCreated) {
+      mapController.animateCamera(CameraUpdate.newLatLng(lastMapPosition!));
+    }
   }
 
   void onMapCreated(GoogleMapController controller) {
     mapController = controller;
+    setState(() {
+      isMapCreated = true;
+    });
     if (lastMapPosition != null) {
-      setState(() {
-        mapController.animateCamera(CameraUpdate.newLatLng(lastMapPosition!));
-      });
+      mapController.animateCamera(CameraUpdate.newLatLng(lastMapPosition!));
     }
   }
 
@@ -49,53 +49,72 @@ class _MapsScreenState extends State<MapsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Select Location"),
-      ),
-      body: GoogleMap(
-        myLocationEnabled: true,
-        myLocationButtonEnabled: true,
-        buildingsEnabled: true,
-        trafficEnabled: true,
-        compassEnabled: true,
-        onMapCreated: onMapCreated,
-        initialCameraPosition: CameraPosition(
-          target: lastMapPosition ?? const LatLng(0.0, 0.0),
-          zoom: 15.0,
+        title: Text(
+          "Pilih Alamat",
+          style: GoogleFonts.roboto(),
         ),
-        markers: {
-          if (lastMapPosition != null)
-            Marker(
-              markerId: const MarkerId('currentLocation'),
-              position: lastMapPosition!,
-            )
-        },
-        onTap: (position) {
-          setState(() {
-            lastMapPosition = position;
-          });
-        },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          if (lastMapPosition != null) {
-            List<Placemark> placemarks = await placemarkFromCoordinates(
-              lastMapPosition!.latitude,
-              lastMapPosition!.longitude,
-            );
+      body: Stack(
+        children: [
+          GoogleMap(
+            myLocationEnabled: true,
+            myLocationButtonEnabled: true,
+            buildingsEnabled: true,
+            trafficEnabled: true,
+            compassEnabled: true,
+            onMapCreated: onMapCreated,
+            initialCameraPosition: CameraPosition(
+              target: lastMapPosition ?? const LatLng(0.0, 0.0),
+              zoom: 15.0,
+            ),
+            markers: {
+              if (lastMapPosition != null)
+                Marker(
+                  markerId: const MarkerId('currentLocation'),
+                  position: lastMapPosition!,
+                )
+            },
+            onTap: (position) {
+              setState(() {
+                lastMapPosition = position;
+              });
+            },
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: FloatingActionButton(
+                backgroundColor: Colors.black,
+                onPressed: () async {
+                  if (lastMapPosition != null) {
+                    List<Placemark> placemarks = await placemarkFromCoordinates(
+                      lastMapPosition!.latitude,
+                      lastMapPosition!.longitude,
+                    );
 
-            if (placemarks.isNotEmpty) {
-              Placemark place = placemarks[0];
-              String fullAddress =
-                  "${place.name}, ${place.street}, ${place.subLocality}, ${place.locality}, ${place.postalCode}, ${place.country}";
-              widget.onLocationSelected(fullAddress);
-            } else {
-              widget.onLocationSelected("No address found");
-            }
+                    if (placemarks.isNotEmpty) {
+                      Placemark place = placemarks[0];
+                      String fullAddress =
+                          "${place.name}, ${place.street}, ${place.subLocality}, ${place.locality}, ${place.postalCode}, ${place.country}";
+                      widget.onLocationSelected(fullAddress);
+                    } else {
+                      widget.onLocationSelected("Alamat tidak ditemukan!");
+                    }
 
-            Navigator.pop(context);
-          }
-        },
-        child: const Text('Submit'),
+                    Navigator.pop(context);
+                  }
+                },
+                child: Text(
+                  'Submit',
+                  style: GoogleFonts.roboto(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
