@@ -13,7 +13,6 @@ class RegisterController extends GetxController {
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
@@ -56,7 +55,6 @@ class RegisterController extends GetxController {
 
       request.fields['name'] = nameController.text.trim();
       request.fields['username'] = usernameController.text.trim();
-      request.fields['email'] = emailController.text.trim();
       request.fields['password'] = passwordController.text.trim();
       request.fields['password_confirmation'] =
           confirmPasswordController.text.trim();
