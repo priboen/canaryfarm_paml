@@ -14,6 +14,8 @@ import 'package:royal_canary_farm_app/app/modules/transactiondetail/bindings/tra
 import 'package:royal_canary_farm_app/app/modules/transactiondetail/views/transactiondetail_view.dart';
 import 'package:royal_canary_farm_app/app/modules/transactionlist/bindings/transactionlist_binding.dart';
 import 'package:royal_canary_farm_app/app/modules/transactionlist/views/transactionlist_view.dart';
+import 'package:royal_canary_farm_app/app/modules/transactionupdate/bindings/transactionupdate_binding.dart';
+import 'package:royal_canary_farm_app/app/modules/transactionupdate/views/transactionupdate_view.dart';
 
 import '../modules/canary/bindings/canary_binding.dart';
 import '../modules/canary/views/canary_view.dart';
@@ -107,6 +109,11 @@ class AppPages {
       name: _Paths.TRANSACTIONDETAIL,
       page: () => TransactiondetailView(),
       binding: TransactiondetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.TRANSACTIONUPDATE,
+      page: () => TransactionupdateView(),
+      binding: TransactionupdateBinding(),
     ),
   ];
 }
