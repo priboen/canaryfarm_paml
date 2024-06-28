@@ -1,5 +1,8 @@
 import 'package:get/get.dart';
 
+import 'package:royal_canary_farm_app/app/modules/canarydetail/bindings/canarydetail_binding.dart';
+import 'package:royal_canary_farm_app/app/modules/canarydetail/views/canarydetail_view.dart';
+
 import '../modules/canary/bindings/canary_binding.dart';
 import '../modules/canary/views/canary_view.dart';
 import '../modules/canarylist/bindings/canarylist_binding.dart';
@@ -57,6 +60,11 @@ class AppPages {
       name: _Paths.CANARYLIST,
       page: () => const CanarylistView(),
       binding: CanarylistBinding(),
+    ),
+    GetPage(
+      name: _Paths.CANARYDETAIL,
+      page: () => CanarydetailView(),
+      binding: CanarydetailBinding(),
     ),
   ];
 }
