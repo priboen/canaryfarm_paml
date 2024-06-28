@@ -9,15 +9,6 @@ import '../controllers/register_controller.dart';
 
 class RegisterView extends GetView<RegisterController> {
   RegisterView({super.key});
-
-  final nameController = TextEditingController();
-  final addressController = TextEditingController();
-  final phoneController = TextEditingController();
-  final emailController = TextEditingController();
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size.width;
@@ -90,7 +81,7 @@ class RegisterView extends GetView<RegisterController> {
                 const SizedBox(height: 15),
                 InputForm(
                   labelParam: 'Nama Lengkap',
-                  controllerParam: nameController,
+                  controllerParam: controller.nameController,
                   obsecureParam: false,
                 ),
                 const SizedBox(height: 15),
@@ -99,7 +90,7 @@ class RegisterView extends GetView<RegisterController> {
                     Expanded(
                       child: InputForm(
                         labelParam: 'Alamat',
-                        controllerParam: addressController,
+                        controllerParam: controller.addressController,
                         obsecureParam: false,
                       ),
                     ),
@@ -110,7 +101,7 @@ class RegisterView extends GetView<RegisterController> {
                         onPressed: () {
                           Get.to(() => MapsScreen(
                                 onLocationSelected: (address) {
-                                  addressController.text = address;
+                                  controller.addressController.text = address;
                                 },
                               ));
                         },
@@ -133,25 +124,25 @@ class RegisterView extends GetView<RegisterController> {
                 const SizedBox(height: 15),
                 InputForm(
                   labelParam: 'No. Telepon',
-                  controllerParam: phoneController,
+                  controllerParam: controller.phoneController,
                   obsecureParam: false,
                 ),
                 const SizedBox(height: 15),
                 InputForm(
                   labelParam: 'Username',
-                  controllerParam: usernameController,
+                  controllerParam: controller.usernameController,
                   obsecureParam: false,
                 ),
                 const SizedBox(height: 15),
                 InputForm(
                   labelParam: 'Password',
-                  controllerParam: passwordController,
+                  controllerParam: controller.passwordController,
                   obsecureParam: true,
                 ),
                 const SizedBox(height: 15),
                 InputForm(
                   labelParam: 'Konfirmasi Password',
-                  controllerParam: confirmPasswordController,
+                  controllerParam: controller.confirmPasswordController,
                   obsecureParam: true,
                 ),
                 const SizedBox(height: 15),
@@ -168,17 +159,6 @@ class RegisterView extends GetView<RegisterController> {
                     onPressed: controller.isLoading.value
                         ? null
                         : () {
-                            // Log the current data
-                            print('Name: ${nameController.text}');
-                            print('Username: ${usernameController.text}');
-                            print('Password: ${passwordController.text}');
-                            print(
-                                'Confirm Password: ${confirmPasswordController.text}');
-                            print('Address: ${addressController.text}');
-                            print('Phone: ${phoneController.text}');
-                            print(
-                                'Selected Image: ${controller.selectedImage}');
-
                             controller.register();
                           },
                     child: controller.isLoading.value
