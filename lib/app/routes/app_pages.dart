@@ -8,6 +8,8 @@ import 'package:royal_canary_farm_app/app/modules/chicksdetail/bindings/chicksde
 import 'package:royal_canary_farm_app/app/modules/chicksdetail/views/chicksdetail_view.dart';
 import 'package:royal_canary_farm_app/app/modules/chickslist/bindings/chickslist_binding.dart';
 import 'package:royal_canary_farm_app/app/modules/chickslist/views/chickslist_view.dart';
+import 'package:royal_canary_farm_app/app/modules/chicksupdate/bindings/chicksupdate_binding.dart';
+import 'package:royal_canary_farm_app/app/modules/chicksupdate/views/chicksupdate_view.dart';
 import 'package:royal_canary_farm_app/app/modules/transaction/bindings/transaction_binding.dart';
 import 'package:royal_canary_farm_app/app/modules/transaction/views/transaction_view.dart';
 import 'package:royal_canary_farm_app/app/modules/transactiondetail/bindings/transactiondetail_binding.dart';
@@ -114,6 +116,11 @@ class AppPages {
       name: _Paths.TRANSACTIONUPDATE,
       page: () => TransactionupdateView(),
       binding: TransactionupdateBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHICKSUPDATE,
+      page: () => ChicksupdateView(),
+      binding: ChicksupdateBinding(),
     ),
   ];
 }
