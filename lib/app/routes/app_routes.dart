@@ -12,6 +12,7 @@ abstract class Routes {
   static const CANARYLIST = _Paths.CANARYLIST;
   static const CANARYDETAIL = _Paths.CANARYDETAIL;
   static const CANARYUPDATE = _Paths.CANARYUPDATE;
+  static const CHICKSLIST = _Paths.CHICKSLIST;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const CANARYLIST = '/canarylist';
   static const CANARYDETAIL = '/canarydetail';
   static const CANARYUPDATE = '/canaryupdate';
+  static const CHICKSLIST = '/chickslist';
 }
