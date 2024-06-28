@@ -4,6 +4,8 @@ import 'package:royal_canary_farm_app/app/modules/canarydetail/bindings/canaryde
 import 'package:royal_canary_farm_app/app/modules/canarydetail/views/canarydetail_view.dart';
 import 'package:royal_canary_farm_app/app/modules/canaryupdate/bindings/canaryupdate_binding.dart';
 import 'package:royal_canary_farm_app/app/modules/canaryupdate/views/canaryupdate_view.dart';
+import 'package:royal_canary_farm_app/app/modules/chicksdetail/bindings/chicksdetail_binding.dart';
+import 'package:royal_canary_farm_app/app/modules/chicksdetail/views/chicksdetail_view.dart';
 import 'package:royal_canary_farm_app/app/modules/chickslist/bindings/chickslist_binding.dart';
 import 'package:royal_canary_farm_app/app/modules/chickslist/views/chickslist_view.dart';
 
@@ -79,6 +81,11 @@ class AppPages {
       name: _Paths.CHICKSLIST,
       page: () => ChickslistView(),
       binding: ChickslistBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHICKSDETAIL,
+      page: () => ChicksdetailView(),
+      binding: ChicksdetailBinding(),
     ),
   ];
 }
