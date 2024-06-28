@@ -10,6 +10,8 @@ import 'package:royal_canary_farm_app/app/modules/chickslist/bindings/chickslist
 import 'package:royal_canary_farm_app/app/modules/chickslist/views/chickslist_view.dart';
 import 'package:royal_canary_farm_app/app/modules/transaction/bindings/transaction_binding.dart';
 import 'package:royal_canary_farm_app/app/modules/transaction/views/transaction_view.dart';
+import 'package:royal_canary_farm_app/app/modules/transactiondetail/bindings/transactiondetail_binding.dart';
+import 'package:royal_canary_farm_app/app/modules/transactiondetail/views/transactiondetail_view.dart';
 import 'package:royal_canary_farm_app/app/modules/transactionlist/bindings/transactionlist_binding.dart';
 import 'package:royal_canary_farm_app/app/modules/transactionlist/views/transactionlist_view.dart';
 
@@ -100,6 +102,11 @@ class AppPages {
       name: _Paths.TRANSACTIONLIST,
       page: () => TransactionlistView(),
       binding: TransactionlistBinding(),
+    ),
+    GetPage(
+      name: _Paths.TRANSACTIONDETAIL,
+      page: () => TransactiondetailView(),
+      binding: TransactiondetailBinding(),
     ),
   ];
 }

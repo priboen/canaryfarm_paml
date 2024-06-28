@@ -16,6 +16,7 @@ abstract class Routes {
   static const CHICKSDETAIL = _Paths.CHICKSDETAIL;
   static const TRANSACTION = _Paths.TRANSACTION;
   static const TRANSACTIONLIST = _Paths.TRANSACTIONLIST;
+  static const TRANSACTIONDETAIL = _Paths.TRANSACTIONDETAIL;
 }
 
 abstract class _Paths {
@@ -33,4 +34,5 @@ abstract class _Paths {
   static const CHICKSDETAIL = '/chicksdetail';
   static const TRANSACTION = '/transaction';
   static const TRANSACTIONLIST = '/transactionlist';
+  static const TRANSACTIONDETAIL = '/transactiondetail';
 }
