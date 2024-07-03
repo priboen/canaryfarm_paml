@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:royal_canary_farm_app/app/data/bird_parent.dart';
 import 'package:royal_canary_farm_app/app/modules/canary/bindings/canary_binding.dart';
 import 'package:royal_canary_farm_app/app/modules/canary/views/canary_view.dart';
+import 'package:royal_canary_farm_app/app/modules/canarydetail/bindings/canarydetail_binding.dart';
+import 'package:royal_canary_farm_app/app/modules/canarydetail/views/canarydetail_view.dart';
 import '../controllers/canarylist_controller.dart';
 
 class CanarylistView extends GetView<CanarylistController> {
@@ -23,26 +26,18 @@ class CanarylistView extends GetView<CanarylistController> {
             return ListView.builder(
               itemCount: controller.birdsList.length,
               itemBuilder: (context, index) {
-                final bird = controller.birdsList[index];
+                BirdParent bird = controller.birdsList[index];
                 return Padding(
-                  padding: const EdgeInsets.all(
-                    8.0,
-                  ),
+                  padding: const EdgeInsets.all(8.0),
                   child: Card(
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        15.0,
-                      ),
+                      borderRadius: BorderRadius.circular(15.0),
                     ),
                     elevation: 5,
                     child: ListTile(
-                      contentPadding: const EdgeInsets.all(
-                        10.0,
-                      ),
+                      contentPadding: const EdgeInsets.all(10.0),
                       leading: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                          bird.photo,
-                        ),
+                        backgroundImage: NetworkImage(bird.photo),
                         radius: 30,
                       ),
                       title: Text(
@@ -69,9 +64,14 @@ class CanarylistView extends GetView<CanarylistController> {
                           ),
                         ],
                       ),
-                      trailing: Icon(
-                        Icons.arrow_forward_ios,
-                      ),
+                      trailing: Icon(Icons.arrow_forward_ios),
+                      onTap: () {
+                        Get.to(() => CanarydetailView(),
+                            arguments: bird, binding: CanarydetailBinding());
+                        print(bird.id);
+                        print(bird.ringNumber);
+                        print(bird.price);
+                      },
                     ),
                   ),
                 );
@@ -82,10 +82,8 @@ class CanarylistView extends GetView<CanarylistController> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          var result = await Get.to(
-            () => CanaryView(),
-            binding: CanaryBinding(),
-          );
+          var result =
+              await Get.to(() => CanaryView(), binding: CanaryBinding());
           if (result == true) {
             controller.fetchBirds();
           }
