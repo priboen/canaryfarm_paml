@@ -31,4 +31,16 @@ class BirdParent {
       typeDescription: json['type_description'],
     );
   }
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'ring_number': ringNumber,
+      'photo': photo,
+      'price': price,
+      'date_of_birth': dateOfBirth,
+      'gender': gender,
+      'canary_type': canaryType,
+      'type_description': typeDescription,
+    };
+  }
 }
