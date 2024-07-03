@@ -108,25 +108,4 @@ class CanaryController extends GetxController {
       isLoading.value = false;
     }
   }
-
-  void resetForm() {
-    nomorRingController.clear();
-    hargaController.clear();
-    dateController.clear();
-    deskripsiController.clear();
-    selectedCanaryType.value = '';
-    selectedGender.value = Gender.jantan;
-    selectedImage = null;
-    formKey.currentState?.reset();
-    update();
-  }
-
-  @override
-  void onClose() {
-    nomorRingController.dispose();
-    hargaController.dispose();
-    dateController.dispose();
-    deskripsiController.dispose();
-    super.onClose();
-  }
 }
