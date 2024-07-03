@@ -10,7 +10,6 @@ abstract class Routes {
   static const CANARY = _Paths.CANARY;
   static const CHICKS = _Paths.CHICKS;
   static const CANARYLIST = _Paths.CANARYLIST;
-  static const CANARYDETAIL = _Paths.CANARYDETAIL;
   static const CANARYUPDATE = _Paths.CANARYUPDATE;
   static const CHICKSLIST = _Paths.CHICKSLIST;
   static const CHICKSDETAIL = _Paths.CHICKSDETAIL;
@@ -19,6 +18,7 @@ abstract class Routes {
   static const TRANSACTIONDETAIL = _Paths.TRANSACTIONDETAIL;
   static const TRANSACTIONUPDATE = _Paths.TRANSACTIONUPDATE;
   static const CHICKSUPDATE = _Paths.CHICKSUPDATE;
+  static const CANARYDETAIL = _Paths.CANARYDETAIL;
 }
 
 abstract class _Paths {
@@ -30,7 +30,6 @@ abstract class _Paths {
   static const CANARY = '/canary';
   static const CHICKS = '/chicks';
   static const CANARYLIST = '/canarylist';
-  static const CANARYDETAIL = '/canarydetail';
   static const CANARYUPDATE = '/canaryupdate';
   static const CHICKSLIST = '/chickslist';
   static const CHICKSDETAIL = '/chicksdetail';
@@ -39,4 +38,5 @@ abstract class _Paths {
   static const TRANSACTIONDETAIL = '/transactiondetail';
   static const TRANSACTIONUPDATE = '/transactionupdate';
   static const CHICKSUPDATE = '/chicksupdate';
+  static const CANARYDETAIL = '/canarydetail';
 }
