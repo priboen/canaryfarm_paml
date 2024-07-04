@@ -1,6 +1,11 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:royal_canary_farm_app/app/data/bird_parent.dart';
+import 'package:royal_canary_farm_app/app/data/chicks.dart';
+import 'package:royal_canary_farm_app/app/modules/canarylist/views/canarylist_view.dart';
+import 'package:royal_canary_farm_app/app/modules/chickslist/views/chickslist_view.dart';
 import 'package:royal_canary_farm_app/app/routes/app_pages.dart';
 import '../controllers/home_controller.dart';
 
@@ -59,17 +64,68 @@ class HomeView extends GetView<HomeController> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                // ItemList(
-                //   size: size,
-                //   titleParam: 'Anak Burung',
-                //   items: ['Burung 1', 'Burung 2', 'Burung 3', 'Burung 4'],
-                // ),
-                // const SizedBox(height: 20),
-                // ItemList(
-                //   size: size,
-                //   titleParam: 'Induk Burung',
-                //   items: ['Induk 1', 'Induk 2'],
-                // ),
+                CarouselSlider(
+                  options: CarouselOptions(
+                    height: size.width * 9 / 16,
+                    autoPlay: true,
+                    enlargeCenterPage: true,
+                    aspectRatio: 16 / 9,
+                    autoPlayInterval: const Duration(
+                      seconds: 5,
+                    ),
+                  ),
+                  items: [
+                    'assets/images/canary_farm_1.png',
+                    'assets/images/canary_farm_2.png',
+                    'assets/images/canary_farm_3.png'
+                  ].map((imagePath) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                          width: size.width,
+                          margin: EdgeInsets.symmetric(
+                            horizontal: 5.0,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.grey,
+                          ),
+                          child: Image.asset(
+                            imagePath,
+                            fit: BoxFit.cover,
+                          ),
+                        );
+                      },
+                    );
+                  }).toList(),
+                ),
+                const SizedBox(height: 20),
+                Obx(() {
+                  if (controller.birdParents.isEmpty) {
+                    return Text("Tidak ada data Induk Burung");
+                  }
+                  return ItemList<BirdParent>(
+                    size: MediaQuery.of(context).size,
+                    titleParam: 'Induk Burung',
+                    items: controller.birdParents,
+                    onSeeAllPressed: () {
+                      Get.to(() => CanarylistView());
+                    },
+                  );
+                }),
+                const SizedBox(height: 20),
+                Obx(() {
+                  if (controller.chickData.isEmpty) {
+                    return Text("Tidak ada data anak burung");
+                  }
+                  return ItemList<Chicks>(
+                    size: MediaQuery.of(context).size,
+                    titleParam: 'Anak Burung',
+                    items: controller.chickData,
+                    onSeeAllPressed: () {
+                      Get.to(() => ChickslistView());
+                    },
+                  );
+                }),
               ],
             ),
           ),
@@ -79,17 +135,19 @@ class HomeView extends GetView<HomeController> {
   }
 }
 
-class ItemList extends StatelessWidget {
+class ItemList<T> extends StatelessWidget {
   const ItemList({
     Key? key,
     required this.size,
     required this.titleParam,
     required this.items,
+    required this.onSeeAllPressed,
   }) : super(key: key);
 
   final Size size;
   final String titleParam;
-  final List<String> items;
+  final List<T> items;
+  final VoidCallback onSeeAllPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +165,7 @@ class ItemList extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: onSeeAllPressed,
               child: Text(
                 "Lihat Semua...",
                 style: GoogleFonts.roboto(
@@ -118,54 +176,82 @@ class ItemList extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: size.width *
-              0.6, // Menyediakan ruang yang cukup untuk ListView horizontal
-          child: Expanded(
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: items.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Card(
-                    elevation: 4,
-                    child: Container(
-                      width:
-                          size.width * 0.4, // Lebar setiap item dalam ListView
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: size.width *
-                                  0.3, // Menyesuaikan ketinggian container untuk gambar
-                              color: Colors.grey[300],
-                              child: Center(
-                                child: Text(
-                                  'Image',
-                                  style: GoogleFonts.roboto(
-                                    fontSize: size.width * 0.04,
-                                  ),
-                                ),
-                              ),
+          height: size.width * 0.65, // Adjust height to prevent overflow
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              final item = items[index];
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Card(
+                  elevation: 4,
+                  child: Container(
+                    width: size.width * 0.4, // Lebar setiap item dalam ListView
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            height: size.width *
+                                0.3, // Menyesuaikan ketinggian container untuk gambar
+                            color: Colors.grey[300],
+                            child: item is BirdParent
+                                ? Image.network(item.photo ?? '',
+                                    fit: BoxFit.cover)
+                                : item is Chicks
+                                    ? Image.network(item.photo ?? '',
+                                        fit: BoxFit.cover)
+                                    : Center(
+                                        child: Text(
+                                          'No Image',
+                                          style: GoogleFonts.roboto(
+                                            fontSize: size.width * 0.04,
+                                          ),
+                                        ),
+                                      ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            item is BirdParent
+                                ? item.ringNumber!
+                                : item is Chicks
+                                    ? item.ringNumber!
+                                    : 'Unknown',
+                            style: GoogleFonts.roboto(
+                              fontSize: size.width * 0.04,
+                              fontWeight: FontWeight.bold,
                             ),
-                            const SizedBox(height: 8),
-                            Text(
-                              items[index],
-                              style: GoogleFonts.roboto(
-                                fontSize: size.width * 0.04,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            item is BirdParent
+                                ? 'Gender: ${item.gender}'
+                                : item is Chicks
+                                    ? 'Gender: ${item.gender}'
+                                    : '',
+                            style: GoogleFonts.roboto(
+                              fontSize: size.width * 0.03,
                             ),
-                          ],
-                        ),
+                          ),
+                          Text(
+                            item is BirdParent
+                                ? 'Canary Type: ${item.canaryType}'
+                                : item is Chicks
+                                    ? 'Canary Type: ${item.canaryType}'
+                                    : '',
+                            style: GoogleFonts.roboto(
+                              fontSize: size.width * 0.03,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ),
       ],
