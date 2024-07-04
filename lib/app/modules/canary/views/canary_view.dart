@@ -37,7 +37,7 @@ class CanaryView extends GetView<CanaryController> {
                           backgroundImage: controller.selectedImage != null
                               ? FileImage(controller.selectedImage!)
                               : const NetworkImage(
-                                  "https://i.pinimg.com/474x/85/f4/d2/85f4d25e0e7ca49b5d7a3854119e7075.jpg",
+                                  "https://t4.ftcdn.net/jpg/03/49/49/79/360_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.webp",
                                 ) as ImageProvider,
                         ),
                         Positioned(
