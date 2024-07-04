@@ -6,24 +6,25 @@ environment:
   sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
+  carousel_slider: ^4.2.1
   cupertino_icons: ^1.0.6
   date_format: ^2.0.7
   dropdown_button2: ^2.3.9
   flutter:
     sdk: flutter
   flutter_secure_storage: ^9.2.2
+  geocoding: ^3.0.0
+  geolocator: ^8.2.1
   get: 4.6.6
   get_cli: ^1.8.1
   get_storage: ^2.1.1
   google_fonts: ^6.2.1
+  google_maps_flutter: ^2.6.1
   http: ^1.2.1
   iconsax_flutter: ^1.0.0
   image_picker: ^1.1.2
   intl: 0.18.1
   path_provider: ^2.1.3
-  geolocator: ^8.2.1
-  geocoding: ^3.0.0
-  google_maps_flutter: ^2.6.1
 
 dev_dependencies:
   flutter_lints: ^3.0.0
@@ -31,4 +32,8 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
+  assets:
+      - assets/images/canary_farm_1.png
+      - assets/images/canary_farm_2.png
+      - assets/images/canary_farm_3.png
   uses-material-design: true
