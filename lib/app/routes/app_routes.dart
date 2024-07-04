@@ -19,6 +19,7 @@ abstract class Routes {
   static const TRANSACTIONUPDATE = _Paths.TRANSACTIONUPDATE;
   static const CHICKSUPDATE = _Paths.CHICKSUPDATE;
   static const CANARYDETAIL = _Paths.CANARYDETAIL;
+  static const PROFILEUPDATE = _Paths.PROFILEUPDATE;
 }
 
 abstract class _Paths {
@@ -39,4 +40,5 @@ abstract class _Paths {
   static const TRANSACTIONUPDATE = '/transactionupdate';
   static const CHICKSUPDATE = '/chicksupdate';
   static const CANARYDETAIL = '/canarydetail';
+  static const PROFILEUPDATE = '/profileupdate';
 }
