@@ -1,20 +1,28 @@
 import 'package:get/get.dart';
+import 'package:royal_canary_farm_app/app/data/chicks.dart';
+import 'package:royal_canary_farm_app/app/modules/chickslist/providers/chickslist_provider.dart';
 
 class ChickslistController extends GetxController {
-  //TODO: Implement ChickslistController
+  var isLoading = false.obs;
+  var chicksList = <Chicks>[].obs;
 
-  final count = 0.obs;
+  final ChickslistProvider service = ChickslistProvider();
   @override
   void onInit() {
     super.onInit();
+    fetchChicks();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  Future<void> fetchChicks() async {
+    try {
+      isLoading(true);
+      var fetchedChicks = await service.fetchChicks();
+      chicksList.assignAll(fetchedChicks);
+    } catch (e) {
+      print(e.toString());
+      Get.snackbar('Error', 'Failed to fetch data: $e');
+    } finally {
+      isLoading(false);
+    }
   }
-
-  @override
-  void onClose() {}
-  void increment() => count.value++;
 }
