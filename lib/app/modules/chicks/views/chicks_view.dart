@@ -17,6 +17,9 @@ class ChicksView extends GetView<ChicksController> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Tambah Anak Burung'),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Obx(
@@ -43,7 +46,7 @@ class ChicksView extends GetView<ChicksController> {
                                       controller.selectedImage != null
                                           ? FileImage(controller.selectedImage!)
                                           : const NetworkImage(
-                                              "https://img.freepik.com/premium-photo/defenseless-chicks-sleep-nest-newly-hatched-canary-chick-eggs-nest-breeding-songbirds-home_158388-9049.jpg",
+                                              "https://t4.ftcdn.net/jpg/03/49/49/79/360_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.webp",
                                             ) as ImageProvider,
                                 ),
                                 Positioned(
@@ -159,7 +162,7 @@ class ChicksView extends GetView<ChicksController> {
                           SizedBox(height: 20),
                           CanaryTypeDropdown(
                             items: controller.males
-                                .map((male) => male.ringNumber)
+                                .map((male) => male.ringNumber!)
                                 .toList(),
                             hint: 'Pilih Indukan Jantan',
                             onChanged: (selectedValue) {
@@ -173,7 +176,7 @@ class ChicksView extends GetView<ChicksController> {
                           ),
                           CanaryTypeDropdown(
                             items: controller.females
-                                .map((female) => female.ringNumber)
+                                .map((female) => female.ringNumber!)
                                 .toList(),
                             hint: 'Pilih Ibu',
                             onChanged: (selectedValue) {
@@ -197,20 +200,6 @@ class ChicksView extends GetView<ChicksController> {
                                 onPressed: controller.isLoading.value
                                     ? null
                                     : () {
-                                        print(
-                                            'Nomor Ring : ${controller.nomorRingController.text}');
-                                        print(
-                                            'Jenis Kenari : ${controller.selectedCanaryType.value}');
-                                        print(
-                                            'DoB : ${controller.dateController.text}');
-                                        print(
-                                            'Gender : ${controller.selectedGender.value}');
-                                        print(
-                                            'Selected Image: ${controller.selectedImage}');
-                                        print(
-                                            'Ayah : ${controller.selectedMale.value!.id}');
-                                        print(
-                                            'Ibu : ${controller.selectedFemale.value!.id}');
                                         controller.saveData();
                                       },
                                 child: controller.isLoading.value

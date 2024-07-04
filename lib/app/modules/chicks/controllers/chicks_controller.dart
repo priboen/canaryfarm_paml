@@ -11,6 +11,7 @@ import 'package:royal_canary_farm_app/api/service/constant.dart';
 import 'package:royal_canary_farm_app/app/data/bird_parent.dart';
 import 'package:royal_canary_farm_app/app/data/gender.dart';
 import 'package:royal_canary_farm_app/app/modules/chicks/providers/parent_chicks_provider_provider.dart';
+import 'package:royal_canary_farm_app/app/modules/widget/navigation_menu.dart';
 
 class ChicksController extends GetxController {
   final formKey = GlobalKey<FormState>();
@@ -29,7 +30,7 @@ class ChicksController extends GetxController {
 
   File? selectedImage;
 
-  final FlutterSecureStorage storage = FlutterSecureStorage();
+  final FlutterSecureStorage storage = const FlutterSecureStorage();
 
   @override
   void onInit() {
@@ -126,7 +127,7 @@ class ChicksController extends GetxController {
           backgroundColor: Colors.green,
           colorText: Colors.white,
         );
-        resetForm();
+        Get.offAll(() => const NavigationMenu());
       } else {
         isLoading.value = false;
         var responseData = await response.stream.bytesToString();
@@ -148,24 +149,5 @@ class ChicksController extends GetxController {
       );
       print(e);
     }
-  }
-
-  void resetForm() {
-    nomorRingController.clear();
-    dateController.clear();
-    deskripsiController.clear();
-    selectedCanaryType.value = '';
-    selectedGender.value = Gender.jantan;
-    selectedImage = null;
-    formKey.currentState?.reset();
-    update();
-  }
-
-  @override
-  void onClose() {
-    nomorRingController.dispose();
-    dateController.dispose();
-    deskripsiController.dispose();
-    super.onClose();
   }
 }
