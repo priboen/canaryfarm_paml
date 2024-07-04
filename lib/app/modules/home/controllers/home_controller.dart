@@ -3,8 +3,12 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:royal_canary_farm_app/api/service/constant.dart';
+import 'package:royal_canary_farm_app/app/data/bird_parent.dart';
+import 'package:royal_canary_farm_app/app/data/chicks.dart';
 import 'package:royal_canary_farm_app/app/data/profile.dart';
 import 'package:http/http.dart' as http;
+import 'package:royal_canary_farm_app/app/modules/canarylist/providers/canarylist_provider.dart';
+import 'package:royal_canary_farm_app/app/modules/chickslist/providers/chickslist_provider.dart';
 
 class HomeController extends GetxController {
   var isLoading = false.obs;
@@ -15,6 +19,11 @@ class HomeController extends GetxController {
     phone: '',
     photo: '',
   ).obs;
+  var birdParents = <BirdParent>[].obs;
+  var chickData = <Chicks>[].obs;
+
+  final CanarylistProvider canaryService = CanarylistProvider();
+  final ChickslistProvider chickService = ChickslistProvider();
 
   final FlutterSecureStorage storage = FlutterSecureStorage();
 
@@ -22,13 +31,14 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
     fetchProfile();
+    fetchBirdParents();
+    fetchChickParents();
   }
 
   void fetchProfile() async {
     try {
       isLoading(true);
       final token = await storage.read(key: 'token');
-      print('Token retrieved: $token');
       if (token == null) {
         Get.snackbar('Error', 'Token not found');
         isLoading(false);
@@ -43,8 +53,6 @@ class HomeController extends GetxController {
 
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
-        print('Response data: $responseData');
-
         profile.value = Profile.fromMap(responseData);
       } else {
         Get.snackbar('Error', 'Failed to load profile: ${response.body}');
@@ -56,19 +64,27 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<int> getBreederId(int userId) async {
-    final response = await http.get(
-      Uri.parse('$url/profile/$userId'),
-      headers: {
-        'Authorization': 'Bearer ${await storage.read(key: 'token')}',
-      },
-    );
+  Future<void> fetchBirdParents() async {
+    try {
+      isLoading(true);
+      List<BirdParent> birds = await canaryService.fetchBird();
+      birdParents.assignAll(birds);
+    } catch (e) {
+      print('Error: $e');
+    } finally {
+      isLoading(false);
+    }
+  }
 
-    if (response.statusCode == 200) {
-      final responseData = jsonDecode(response.body);
-      return responseData['breeder_id'];
-    } else {
-      throw Exception('Failed to load breederId');
+  Future<void> fetchChickParents() async {
+    try {
+      isLoading(true);
+      List<Chicks> chicks = await chickService.fetchChicks();
+      chickData.assignAll(chicks);
+    } catch (e) {
+      print('Error: $e');
+    } finally {
+      isLoading(false);
     }
   }
 }
