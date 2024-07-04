@@ -9,6 +9,7 @@ class CanaryTypeDropdown extends StatelessWidget {
   final String? hint;
   final Function(String?)? onChanged;
   final Function(String?)? onSaved;
+  final String? selectedType;
 
   const CanaryTypeDropdown({
     super.key,
@@ -16,12 +17,14 @@ class CanaryTypeDropdown extends StatelessWidget {
     this.hint,
     this.onChanged,
     this.onSaved,
+    this.selectedType,
   });
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField2(
       isExpanded: true,
+      value: selectedType,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(vertical: 16),
         border: OutlineInputBorder(
