@@ -3,33 +3,33 @@ import 'dart:convert';
 
 class Status {
   int? id;
-  final String parentStatus;
+  String? name;
   Status({
     this.id,
-    required this.parentStatus,
+    this.name,
   });
 
   Status copyWith({
     int? id,
-    String? parentStatus,
+    String? name,
   }) {
     return Status(
       id: id ?? this.id,
-      parentStatus: parentStatus ?? this.parentStatus,
+      name: name ?? this.name,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'parentStatus': parentStatus,
+      'name': name,
     };
   }
 
   factory Status.fromMap(Map<String, dynamic> map) {
     return Status(
       id: map['id'] != null ? map['id'] as int : null,
-      parentStatus: map['parentStatus'] as String,
+      name: map['name'] != null ? map['name'] as String : null,
     );
   }
 
@@ -39,15 +39,17 @@ class Status {
       Status.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'Status(id: $id, parentStatus: $parentStatus)';
+  String toString() => 'Status(id: $id, name: $name)';
 
   @override
   bool operator ==(covariant Status other) {
     if (identical(this, other)) return true;
-
-    return other.id == id && other.parentStatus == parentStatus;
+  
+    return 
+      other.id == id &&
+      other.name == name;
   }
 
   @override
-  int get hashCode => id.hashCode ^ parentStatus.hashCode;
+  int get hashCode => id.hashCode ^ name.hashCode;
 }

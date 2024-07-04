@@ -11,4 +11,15 @@ extension GenderExtension on Gender {
         return "";
     }
   }
+
+  static Gender fromString(String gender) {
+    switch (gender.toLowerCase()) {
+      case 'jantan':
+        return Gender.jantan;
+      case 'betina':
+        return Gender.betina;
+      default:
+        return Gender.jantan;
+    }
+  }
 }
