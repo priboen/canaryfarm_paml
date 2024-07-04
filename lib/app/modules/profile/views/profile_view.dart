@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:royal_canary_farm_app/app/routes/app_pages.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
@@ -16,7 +17,8 @@ class ProfileView extends GetView<ProfileController> {
           if (controller.isLoading.value) {
             return const Center(child: CircularProgressIndicator());
           } else {
-            final photoUrl = controller.profile.value.photo; // Now uses full URL from API
+            final photoUrl =
+                controller.profile.value.photo; // Now uses full URL from API
 
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,54 +26,9 @@ class ProfileView extends GetView<ProfileController> {
                 Center(
                   child: Column(
                     children: [
-                      Stack(
-                        children: [
-                          CircleAvatar(
-                            radius: 80,
-                            backgroundImage: NetworkImage(photoUrl),
-                          ),
-                          Positioned(
-                            bottom: -10,
-                            left: 100,
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle,
-                              ),
-                              child: IconButton(
-                                onPressed: () {
-                                  showModalBottomSheet(
-                                    context: context,
-                                    builder: (_) {
-                                      return Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          ListTile(
-                                            leading: const Icon(Icons.camera),
-                                            title: const Text('Camera'),
-                                            onTap: () {
-                                              // Implementasi pengambilan gambar dari kamera
-                                              Get.back();
-                                            },
-                                          ),
-                                          ListTile(
-                                            leading: const Icon(Icons.photo_album),
-                                            title: const Text('Gallery'),
-                                            onTap: () {
-                                              // Implementasi pengambilan gambar dari galeri
-                                              Get.back();
-                                            },
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                },
-                                icon: const Icon(Icons.add_a_photo_rounded),
-                              ),
-                            ),
-                          ),
-                        ],
+                      CircleAvatar(
+                        radius: 80,
+                        backgroundImage: NetworkImage(photoUrl),
                       ),
                       const SizedBox(
                         height: 20,
@@ -96,36 +53,25 @@ class ProfileView extends GetView<ProfileController> {
                       const SizedBox(
                         height: 20,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          ElevatedButton.icon(
-                            onPressed: () {},
-                            label: Text(
-                              "Edit Profile",
-                              style: GoogleFonts.roboto(
-                                fontSize: size * 0.030,
-                              ),
-                            ),
-                            icon: const Icon(
-                              Icons.edit,
-                              size: 15,
-                            ),
+                      ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.yellow[100],
+                        ),
+                        onPressed: () {
+                          Get.toNamed(Routes.PROFILEUPDATE);
+                        },
+                        label: Text(
+                          "Edit Profile",
+                          style: GoogleFonts.roboto(
+                            fontSize: size * 0.030,
+                            color: Colors.black,
                           ),
-                          ElevatedButton.icon(
-                            onPressed: () {},
-                            label: Text(
-                              "Hapus Akun",
-                              style: GoogleFonts.roboto(
-                                fontSize: size * 0.030,
-                              ),
-                            ),
-                            icon: const Icon(
-                              Icons.close,
-                              size: 15,
-                            ),
-                          ),
-                        ],
+                        ),
+                        icon: const Icon(
+                          color: Colors.black,
+                          Icons.edit,
+                          size: 15,
+                        ),
                       ),
                     ],
                   ),
