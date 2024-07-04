@@ -18,11 +18,10 @@ class CanarylistProvider extends GetConnect {
     );
 
     if (response.statusCode == 200) {
-      List jsonResponse =
-          jsonDecode(response.body)['data'];
+      List jsonResponse = jsonDecode(response.body)['data'];
       return jsonResponse.map((bird) => BirdParent.fromJson(bird)).toList();
     } else {
-      throw Exception('Failed to load birds');
+      throw Exception('Failed to load birds: ${response.body}');
     }
   }
 }

@@ -37,11 +37,11 @@ class CanarylistView extends GetView<CanarylistController> {
                     child: ListTile(
                       contentPadding: const EdgeInsets.all(10.0),
                       leading: CircleAvatar(
-                        backgroundImage: NetworkImage(bird.photo),
+                        backgroundImage: NetworkImage(bird.photo!),
                         radius: 30,
                       ),
                       title: Text(
-                        bird.ringNumber,
+                        bird.ringNumber!,
                         style: GoogleFonts.roboto(
                           fontSize: size * 0.040,
                           fontWeight: FontWeight.bold,
